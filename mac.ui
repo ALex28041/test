@@ -1,0 +1,543 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ui version="4.0">
+ <class>Mac_mainwindown</class>
+ <widget class="QMainWindow" name="Mac_mainwindown">
+  <property name="geometry">
+   <rect>
+    <x>0</x>
+    <y>0</y>
+    <width>1127</width>
+    <height>905</height>
+   </rect>
+  </property>
+  <property name="windowTitle">
+   <string>MainWindow</string>
+  </property>
+  <widget class="QWidget" name="centralwidget">
+   <widget class="QWidget" name="formLayoutWidget">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>70</y>
+      <width>471</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout">
+     <item row="0" column="0">
+      <widget class="QLabel" name="fullname_lb_sender">
+       <property name="text">
+        <string>Full Name:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="fullname_text_sender"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="phone_lb_sender">
+       <property name="text">
+        <string>Phone:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="phone_text_sender"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="address_lb_sender">
+       <property name="text">
+        <string>Address:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="address_text_sender"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="label">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>10</y>
+      <width>121</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Serif</family>
+      <pointsize>25</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Sender</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="formLayoutWidget_2">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>70</y>
+      <width>471</width>
+      <height>81</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout_2">
+     <item row="0" column="0">
+      <widget class="QLabel" name="fullname_lb_receiver">
+       <property name="text">
+        <string>Full Name:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="fullname_text_receiver"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="phone_lb_receiver">
+       <property name="text">
+        <string>Phone:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="phone_text_receiver"/>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="address_lb_receiver">
+       <property name="text">
+        <string>Address:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="address_text_receiver"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="label_2">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>10</y>
+      <width>121</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Serif</family>
+      <pointsize>25</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Receiver</string>
+    </property>
+   </widget>
+   <widget class="QLabel" name="label_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>220</y>
+      <width>291</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <pointsize>22</pointsize>
+     </font>
+    </property>
+    <property name="text">
+     <string>Shipping Information</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="formLayoutWidget_3">
+    <property name="geometry">
+     <rect>
+      <x>20</x>
+      <y>280</y>
+      <width>471</width>
+      <height>381</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout_3">
+     <item row="0" column="0">
+      <widget class="QLabel" name="tracking_number_lb">
+       <property name="text">
+        <string>TRACKING NUMBER:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="0" column="1">
+      <widget class="QLineEdit" name="tracking_number_text"/>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_4">
+       <property name="text">
+        <string>SERVICE TYPRE:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="1">
+      <widget class="QComboBox" name="cbox_service">
+       <item>
+        <property name="text">
+         <string>Select</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>AIRPORT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOOR</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>STATION</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOOR/Excl. Duty</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_5">
+       <property name="text">
+        <string>DELIVERY OPTION:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QComboBox" name="cbox_delivery">
+       <item>
+        <property name="text">
+         <string>Select</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>PRIORITY</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>EXPEDITE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>SAVER</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="3" column="0">
+      <widget class="QLabel" name="label_6">
+       <property name="text">
+        <string>CARGO TYPE:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="3" column="1">
+      <widget class="QComboBox" name="cbox_cargo">
+       <item>
+        <property name="text">
+         <string>Select</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>GIFT</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>DOCUMENTS</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>COMMERCIAL SAMPLE</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>RETURNED GOOD</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="4" column="1">
+      <widget class="QLineEdit" name="pieces_text"/>
+     </item>
+     <item row="5" column="0">
+      <widget class="QLabel" name="label_8">
+       <property name="text">
+        <string>DIMENTION:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="5" column="1">
+      <widget class="QLineEdit" name="dimention_text"/>
+     </item>
+     <item row="6" column="0">
+      <widget class="QLabel" name="label_9">
+       <property name="text">
+        <string>WEIGHT:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="6" column="1">
+      <widget class="QLineEdit" name="weight_text"/>
+     </item>
+     <item row="7" column="0">
+      <widget class="QLabel" name="label_10">
+       <property name="text">
+        <string>CHARGEABLE WEIGHT:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="7" column="1">
+      <widget class="QLineEdit" name="charge_weight_text"/>
+     </item>
+     <item row="8" column="0">
+      <widget class="QLabel" name="label_11">
+       <property name="text">
+        <string>DECLARARED:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="8" column="1">
+      <widget class="QLineEdit" name="declar_text"/>
+     </item>
+     <item row="9" column="0">
+      <widget class="QLabel" name="label_12">
+       <property name="text">
+        <string>OTHER CHARGES:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="9" column="1">
+      <widget class="QLineEdit" name="othe_decla_text"/>
+     </item>
+     <item row="10" column="0">
+      <widget class="QLabel" name="label_13">
+       <property name="text">
+        <string>TOTAL CHARGE:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="10" column="1">
+      <widget class="QLineEdit" name="total_charge_text"/>
+     </item>
+     <item row="11" column="0">
+      <widget class="QLabel" name="label_15">
+       <property name="text">
+        <string>PAYMENT METHOD</string>
+       </property>
+      </widget>
+     </item>
+     <item row="11" column="1">
+      <widget class="QComboBox" name="cbox_pay">
+       <item>
+        <property name="text">
+         <string>select</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CASH</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>CHECK</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>UNPAID</string>
+        </property>
+       </item>
+       <item>
+        <property name="text">
+         <string>OTHER</string>
+        </property>
+       </item>
+      </widget>
+     </item>
+     <item row="12" column="0">
+      <widget class="QLabel" name="label_16">
+       <property name="text">
+        <string>DATE:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="12" column="1">
+      <widget class="QDateEdit" name="date_time">
+       <property name="displayFormat">
+        <string>MM-dd-yyyy</string>
+       </property>
+       <property name="date">
+        <date>
+         <year>2023</year>
+         <month>6</month>
+         <day>19</day>
+        </date>
+       </property>
+      </widget>
+     </item>
+     <item row="4" column="0">
+      <widget class="QLabel" name="label_7">
+       <property name="text">
+        <string>NUMBER OF PIECES:</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QLabel" name="label_14">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>220</y>
+      <width>331</width>
+      <height>51</height>
+     </rect>
+    </property>
+    <property name="font">
+     <font>
+      <family>MS Serif</family>
+      <pointsize>25</pointsize>
+      <weight>75</weight>
+      <bold>true</bold>
+     </font>
+    </property>
+    <property name="text">
+     <string>Details</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_cancel">
+    <property name="geometry">
+     <rect>
+      <x>90</x>
+      <y>700</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Cancel</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_submit">
+    <property name="geometry">
+     <rect>
+      <x>310</x>
+      <y>700</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Submit</string>
+    </property>
+   </widget>
+   <widget class="QWidget" name="formLayoutWidget_4">
+    <property name="geometry">
+     <rect>
+      <x>560</x>
+      <y>280</y>
+      <width>561</width>
+      <height>201</height>
+     </rect>
+    </property>
+    <layout class="QFormLayout" name="formLayout_4">
+     <item row="0" column="0">
+      <widget class="QLabel" name="label_17">
+       <property name="text">
+        <string>COMMODITY DESCRIPTION (CHI TIẾT HÀNG GỞI):</string>
+       </property>
+      </widget>
+     </item>
+     <item row="1" column="0">
+      <widget class="QLabel" name="label_18">
+       <property name="text">
+        <string>QUANTITY:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="0">
+      <widget class="QLabel" name="label_19">
+       <property name="text">
+        <string>VALUE:</string>
+       </property>
+      </widget>
+     </item>
+     <item row="2" column="1">
+      <widget class="QLineEdit" name="value_text"/>
+     </item>
+     <item row="1" column="1">
+      <widget class="QLineEdit" name="quantity_text"/>
+     </item>
+     <item row="0" column="1">
+      <widget class="QPlainTextEdit" name="commodity_textplain"/>
+     </item>
+    </layout>
+   </widget>
+   <widget class="QPushButton" name="bt_print">
+    <property name="geometry">
+     <rect>
+      <x>500</x>
+      <y>700</y>
+      <width>75</width>
+      <height>23</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Print</string>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="bt_add_new_rc">
+    <property name="geometry">
+     <rect>
+      <x>570</x>
+      <y>170</y>
+      <width>75</width>
+      <height>41</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add New</string>
+    </property>
+   </widget>
+  </widget>
+  <widget class="QMenuBar" name="menubar">
+   <property name="geometry">
+    <rect>
+     <x>0</x>
+     <y>0</y>
+     <width>1127</width>
+     <height>21</height>
+    </rect>
+   </property>
+  </widget>
+  <widget class="QStatusBar" name="statusbar"/>
+ </widget>
+ <resources/>
+ <connections/>
+</ui>
