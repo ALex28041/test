@@ -7,7 +7,7 @@
 
 
 from PyQt6 import QtCore, QtGui, QtWidgets
-from api_mac import insert_sender,insert_receiver,insert_shipping_detail,run_sheet_api
+from api_mac import insert_sender,insert_receiver,insert_shipping_detail,run_sheet_api,generate_tracking_number
 from PyQt6.QtWidgets import QPushButton, QTableView, QLineEdit, QMessageBox,QInputDialog
 
 
@@ -377,11 +377,14 @@ class Ui_Mac_mainwindown(object):
         run_sheet_api(tuple_data)
         list_data.clear
         
-
+    def fill_data_one(self):
+        tracking_number = generate_tracking_number()  # Gọi hàm generate_tracking_number để lấy tracking number
+        self.tracking_number_text.setText(tracking_number)
     def fill_data(self, fullname_sd, phone_sd, address_sd):
         self.fullname_text_sender.setText(fullname_sd)
         self.phone_text_sender.setText(phone_sd)
         self.address_text_sender.setText(address_sd)
+        self.fill_data_one()
     def fill_data_test(self, fullname_sd, phone_sd, address_sd,fullname_r,phone_r,address_r):
         self.fullname_text_sender.setText(fullname_sd)
         self.phone_text_sender.setText(phone_sd)
@@ -389,6 +392,7 @@ class Ui_Mac_mainwindown(object):
         self.fullname_text_receiver.setText(fullname_r)
         self.phone_text_receiver.setText(phone_r)
         self.address_text_receiver.setText(address_r)
+        self.fill_data_one()
     def test(self):
         fullname_rc = self.fullname_text_receiver.text()
         phone_rc = self.phone_text_receiver.text()  # Example phone number
@@ -421,6 +425,8 @@ class Ui_Mac_mainwindown(object):
         Ui_Mac_mainwindown.list_data.append(id_sender)
     def handle_close(self):
         Mac_mainwindown.close()
+    
+
 if __name__ == "__main__":
     import sys
     app = QtWidgets.QApplication(sys.argv)

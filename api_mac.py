@@ -67,6 +67,7 @@ import gspread
 from PyQt6.QtWidgets import QMessageBox
 from bson.objectid import ObjectId
 from oauth2client.service_account import ServiceAccountCredentials
+import random
 #mongo_url = "mongodb+srv://test1:test1@cluster0.73t2bch.mongodb.net/?retryWrites=true&w=majority"
 mongo_url="mongodb://localhost:27017"
 database_name = "MAC"
@@ -126,6 +127,27 @@ def insert_shipping_detail(tracking_number, service_type, delivery_option, cargo
     # Insert the shipping detail into the collection
     shipping_detail_collection = db['ShippingDetail']
     shipping_detail_collection.insert_one(shipping_detail)
+
+def generate_tracking_number():
+    shipping_detail_collection = db['ShippingDetail']
+
+    # Tìm giá trị lớn nhất của trường "tracking_number"
+    max_tracking_number = shipping_detail_collection.find_one(
+        {'tracking_number': {'$ne': ''}},  # Lọc ra các bản ghi có trường "tracking_number" không rỗng
+        sort=[('tracking_number', -1)]  # Sắp xếp theo thứ tự giảm dần của trường "tracking_number"
+    )
+
+    if max_tracking_number:
+        last_tracking_number = max_tracking_number['tracking_number']
+        tracking_number_suffix = int(last_tracking_number[3:]) + 1
+    else:
+        tracking_number_suffix = 6094  # Giá trị bắt đầu nếu không có bản ghi
+
+    current_tracking_number = f'MAC{tracking_number_suffix}'
+
+    return current_tracking_number
+
+
 
 def run_sheet_api(data):
        

@@ -213,6 +213,7 @@ class Ui_timkiem_mainwindows(object):
             self.mac_form = QtWidgets.QMainWindow()
             self.uis = Ui_Mac_mainwindown()
             self.uis.setupUi(self.mac_form)
+            self.uis.fill_data_one()
             self.mac_form.show()        
     def load_data(self):
         client, db = self.connect_to_mongodb(self.mongo_url, self.database_name)
