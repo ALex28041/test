@@ -8,7 +8,7 @@
 
 from PyQt6 import QtCore, QtGui, QtWidgets
 from api_mac import insert_sender,insert_receiver,insert_shipping_detail,run_sheet_api,generate_tracking_number
-from PyQt6.QtWidgets import QPushButton, QTableView, QLineEdit, QMessageBox,QInputDialog
+from PyQt6.QtWidgets import  QMessageBox
 
 
 class Ui_Mac_mainwindown(object):
@@ -188,6 +188,7 @@ class Ui_Mac_mainwindown(object):
         self.label_16.setObjectName("label_16")
         self.formLayout_3.setWidget(12, QtWidgets.QFormLayout.ItemRole.LabelRole, self.label_16)
         self.date_time = QtWidgets.QDateEdit(parent=self.formLayoutWidget_3)
+        self.date_time.setDate(QtCore.QDate(2023, 6, 19))
         self.date_time.setObjectName("date_time")
         self.formLayout_3.setWidget(12, QtWidgets.QFormLayout.ItemRole.FieldRole, self.date_time)
         self.label_7 = QtWidgets.QLabel(parent=self.formLayoutWidget_3)
@@ -238,6 +239,9 @@ class Ui_Mac_mainwindown(object):
         self.bt_add_new_rc = QtWidgets.QPushButton(parent=self.centralwidget)
         self.bt_add_new_rc.setGeometry(QtCore.QRect(570, 170, 75, 41))
         self.bt_add_new_rc.setObjectName("bt_add_new_rc")
+        self.bt_add_shipping = QtWidgets.QPushButton(parent=self.centralwidget)
+        self.bt_add_shipping.setGeometry(QtCore.QRect(670, 700, 81, 31))
+        self.bt_add_shipping.setObjectName("bt_add_shipping")
         Mac_mainwindown.setCentralWidget(self.centralwidget)
         self.menubar = QtWidgets.QMenuBar(parent=Mac_mainwindown)
         self.menubar.setGeometry(QtCore.QRect(0, 0, 1127, 21))
@@ -246,13 +250,17 @@ class Ui_Mac_mainwindown(object):
         self.statusbar = QtWidgets.QStatusBar(parent=Mac_mainwindown)
         self.statusbar.setObjectName("statusbar")
         Mac_mainwindown.setStatusBar(self.statusbar)
+
         self.retranslateUi(Mac_mainwindown)
         QtCore.QMetaObject.connectSlotsByName(Mac_mainwindown)
+
+
         # button click
         self.bt_submit.clicked.connect(self.submit_data)
         self.bt_add_new_rc.clicked.connect(self.test)
         self.bt_print.clicked.connect(self.print)
         self.bt_cancel.clicked.connect(self.handle_close)
+        self.bt_add_shipping.clicked.connect(self.add_shipping)
     def retranslateUi(self, Mac_mainwindown):
         _translate = QtCore.QCoreApplication.translate
         Mac_mainwindown.setWindowTitle(_translate("Mac_mainwindown", "MainWindow"))
@@ -296,6 +304,7 @@ class Ui_Mac_mainwindown(object):
         self.cbox_pay.setItemText(3, _translate("Mac_mainwindown", "UNPAID"))
         self.cbox_pay.setItemText(4, _translate("Mac_mainwindown", "OTHER"))
         self.label_16.setText(_translate("Mac_mainwindown", "DATE:"))
+        self.date_time.setDisplayFormat(_translate("Mac_mainwindown", "MM-dd-yyyy"))
         self.label_7.setText(_translate("Mac_mainwindown", "NUMBER OF PIECES:"))
         self.label_14.setText(_translate("Mac_mainwindown", "Details"))
         self.bt_cancel.setText(_translate("Mac_mainwindown", "Cancel"))
@@ -305,8 +314,8 @@ class Ui_Mac_mainwindown(object):
         self.label_19.setText(_translate("Mac_mainwindown", "VALUE:"))
         self.bt_print.setText(_translate("Mac_mainwindown", "Print"))
         self.bt_add_new_rc.setText(_translate("Mac_mainwindown", "Add New"))
-    # ham Submit:
-    
+        self.bt_add_shipping.setText(_translate("Mac_mainwindown", "Add shipping"))
+
     def submit_data(self):
         
         fullname_sd = self.fullname_text_sender.text()
@@ -371,9 +380,7 @@ class Ui_Mac_mainwindown(object):
         list_data.append(date)
         list_data.append(number_of_pieces)
         list_data.append(commodity_description)
-        print(list_data)
         tuple_data = tuple(list_data)
-        print(tuple_data)
         run_sheet_api(tuple_data)
         list_data.clear
         
@@ -409,7 +416,7 @@ class Ui_Mac_mainwindown(object):
         total_charge=self.total_charge_text.text()
         payment_method=self.cbox_pay.currentText()
         date=self.date_time.date().toString("MM-dd-yyyy")
-        number_of_pieces=self.tracking_number_text.text()
+        number_of_pieces=self.pieces_text.text()
         commodity_description= self.commodity_textplain.toPlainText()
         quantity= self.quantity_text.text()
         value= self.value_text.text()
@@ -421,8 +428,37 @@ class Ui_Mac_mainwindown(object):
                            number_of_pieces, commodity_description, quantity, value, data, rec_id)
         Ui_Mac_mainwindown.list_data.clear()
         QMessageBox.information(None, "Success", "Data add new receiver successfully.")
+    def add_shipping(self):
+       
+        tracking_number= self.tracking_number_text.text()
+        service_type=self.cbox_service.currentText()
+        delivery_option=self.cbox_delivery.currentText()
+        cargo_type=self.cbox_cargo.currentText()
+        dimension=self.dimention_text.text()
+        weight= self.weight_text.text()          
+        chargeable_weight=self.charge_weight_text.text()
+        declared=self.declar_text.text()
+        other_charges=self.othe_decla_text.text()
+        total_charge=self.total_charge_text.text()
+        payment_method=self.cbox_pay.currentText()
+        date=self.date_time.date().toString("MM-dd-yyyy")
+        number_of_pieces=self.pieces_text.text()
+        commodity_description= self.commodity_textplain.toPlainText()
+        quantity= self.quantity_text.text()
+        value= self.value_text.text()
+        # Call the insert_sender function with the retrieved values
+        id_sender=Ui_Mac_mainwindown.list_data[0]
+        id_receiver=Ui_Mac_mainwindown.list_data[1]
+        
+        insert_shipping_detail(tracking_number, service_type, delivery_option, cargo_type, dimension, weight,
+                           chargeable_weight, declared, other_charges, total_charge, payment_method, date,
+                           number_of_pieces, commodity_description, quantity, value, id_sender, id_receiver)
+        Ui_Mac_mainwindown.list_data.clear()
+        QMessageBox.information(None, "Success", "Data add new receiver successfully.")
     def get_id(self,id_sender):
         Ui_Mac_mainwindown.list_data.append(id_sender)
+    def get_id_rc(self,id_rc):
+        Ui_Mac_mainwindown.list_data.append(id_rc)
     def handle_close(self):
         Mac_mainwindown.close()
     

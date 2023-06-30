@@ -203,9 +203,12 @@ class Ui_timkiem_mainwindows(object):
         self.uis.setupUi(self.mac_form)
         fullname, phone, address,fullname_r,phone_r,address_r = self.get_data_from_tableview_all()
         id_sender=self.search()
+        id_receiver=self.search_id_receiver()
         self.uis.fill_data_test(fullname, phone, address,fullname_r,phone_r,address_r)
         self.uis.get_id(id_sender)
+        self.uis.get_id_rc(id_receiver)
         self.mac_form.show()
+    
     def open_mac_form(self):
         # Get data from the selected row in the table view
             # Fill out the data in the Mac form
@@ -214,7 +217,8 @@ class Ui_timkiem_mainwindows(object):
             self.uis = Ui_Mac_mainwindown()
             self.uis.setupUi(self.mac_form)
             self.uis.fill_data_one()
-            self.mac_form.show()        
+            self.mac_form.show()
+    
     def load_data(self):
         client, db = self.connect_to_mongodb(self.mongo_url, self.database_name)
         
@@ -383,6 +387,16 @@ class Ui_timkiem_mainwindows(object):
         for item in sender_data:
             if phone[1]==item['Phone_sender']:
                  return item['_id']
+    def search_id_receiver(self):
+        client, db = self.connect_to_mongodb(self.mongo_url, self.database_name)
+        Receiver_collection = db["Receiver"]
+        Receiver_data = list(Receiver_collection.find())
+        fullname=self.get_data_from_tableview_all()
+        
+        for item in Receiver_data:
+            if fullname[3]==item['Fullname_receiver']:
+                 return item['_id']
+    
     def get_data_from_tableview(self):
         # Get the index of the selected row in QTableView
         selected_row = self.table_data_view.currentIndex().row()
@@ -506,6 +520,7 @@ class Ui_timkiem_mainwindows(object):
             # Lấy dữ liệu từ các ô trong hàng đã chọn
             #fullname_sender = self.table_data_view.model().index(selected_row, 0).data()
             phone_sender=self.table_data_view.model().index(selected_row, 1).data()
+            fullname_receiver=self.table_data_view.model().index(selected_row,3).data()
             # Xác nhận xóa bản ghi
             confirmation = QMessageBox.question(self.table_data_view, "Delete", "Are you sure you want to delete this record?", QMessageBox.StandardButton.Yes | QMessageBox.StandardButton.No)
             if confirmation == QMessageBox.StandardButton.Yes:
@@ -515,25 +530,41 @@ class Ui_timkiem_mainwindows(object):
 
                 # Lấy collection Sender
                 sender_collection = db["Sender"]
+                receiver_collection=db["Receiver"]
+                shipping_collection=db["ShippingDetail"]
                 record = sender_collection.find_one({"Phone_sender": phone_sender})
                 if record:
                     # Lấy ID của bản ghi Sender
                     sender_id = record["_id"]
                     
-                    # Xóa bản ghi trong Sender
+                    count_id_s = receiver_collection.count_documents({"Sender_id": sender_id})
+                    
+                    get_name= receiver_collection.find_one({"Fullname_receiver":fullname_receiver})
+                    if count_id_s > 1:
+                        get_receiver_id = get_name["_id"] 
+                        receiver_collection.delete_one({"_id": get_receiver_id})
+                        shipping_collection.delete_one({"Receiver_id": get_receiver_id})
+                    else:
+                        sender_collection.delete_one({"_id": sender_id})
+                        receiver_collection.delete_many({"Sender_id": sender_id})
+                        shipping_collection.delete_many({"Sender_id": sender_id})
+                        
+                    self.table_data_view.model().removeRow(selected_row)    
+                    QMessageBox.information(self.table_data_view, "Success", "Delete successful!")
+                """# Xóa bản ghi trong Sender
                     sender_collection.delete_one({"_id": sender_id})
                     
                     # Xóa bản ghi trong Receiver
-                    db["Receiver"].delete_many({"Sender_id": sender_id})
+                    receiver_collection.delete_many({"Sender_id": sender_id})
                     
                     # Xóa bản ghi trong ShippingDetail
-                    db["ShippingDetail"].delete_many({"Sender_id": sender_id})
+                    shipping_collection.delete_many({"Sender_id": sender_id})"""
 
                     # Xóa dữ liệu trong QTableView
-                    self.table_data_view.model().removeRow(selected_row)
+                    #self.table_data_view.model().removeRow(selected_row)
 
                     # Hiển thị thông báo delete thành công
-                    QMessageBox.information(self.table_data_view, "Success", "Delete successful!")
+                    #QMessageBox.information(self.table_data_view, "Success", "Delete successful!")
 if __name__ == "__main__":
     
     app = QtWidgets.QApplication(sys.argv)
