@@ -525,6 +525,19 @@
      <string>Add New</string>
     </property>
    </widget>
+   <widget class="QPushButton" name="bt_add_shipping">
+    <property name="geometry">
+     <rect>
+      <x>670</x>
+      <y>700</y>
+      <width>81</width>
+      <height>31</height>
+     </rect>
+    </property>
+    <property name="text">
+     <string>Add shipping</string>
+    </property>
+   </widget>
   </widget>
   <widget class="QMenuBar" name="menubar">
    <property name="geometry">
